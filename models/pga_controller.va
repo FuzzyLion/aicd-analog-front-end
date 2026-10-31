@@ -1,0 +1,70 @@
+`include "constants.vams"
+`include "disciplines.vams"
+
+// Behavioral 3-to-8 one-hot decoder for the PGA switch multiplexer.
+//
+// B2:B0 = 3'b000 selects S0, while 3'b111 selects S7.  Each
+// complementary output (SxB) is intended to drive the PMOS gate of a
+// transmission gate; Sx drives the corresponding NMOS gate.
+//
+// This model is suitable for behavioral verification in Cadence.  The course
+// task description also asks for custom NAND/NOR/inverter cells, so confirm
+// whether a behavioral Verilog-A controller is accepted in the final design.
+module pga_controller (
+    b2, b1, b0,
+    s7, s7b, s6, s6b, s5, s5b, s4, s4b,
+    s3, s3b, s2, s2b, s1, s1b, s0, s0b,
+    vdd, gnd
+);
+
+    input b2, b1, b0;
+    output s7, s7b, s6, s6b, s5, s5b, s4, s4b;
+    output s3, s3b, s2, s2b, s1, s1b, s0, s0b;
+    input vdd, gnd;
+
+    electrical b2, b1, b0;
+    electrical s7, s7b, s6, s6b, s5, s5b, s4, s4b;
+    electrical s3, s3b, s2, s2b, s1, s1b, s0, s0b;
+    electrical vdd, gnd;
+
+    parameter real vth_ratio = 0.5 from (0.0:1.0);
+    parameter real td = 0.0 from [0.0:inf);
+    parameter real tr = 1n from (0.0:inf);
+    parameter real tf = 1n from (0.0:inf);
+
+    integer code;
+    real vlogic;
+
+    analog begin
+        // Decode each input against a threshold that tracks the supply.
+        vlogic = V(vdd, gnd);
+        code = 4 * (V(b2, gnd) > vth_ratio * vlogic)
+             + 2 * (V(b1, gnd) > vth_ratio * vlogic)
+             +     (V(b0, gnd) > vth_ratio * vlogic);
+
+        V(s0,  gnd) <+ transition((code == 0) ? vlogic : 0.0, td, tr, tf);
+        V(s0b, gnd) <+ transition((code == 0) ? 0.0 : vlogic, td, tr, tf);
+
+        V(s1,  gnd) <+ transition((code == 1) ? vlogic : 0.0, td, tr, tf);
+        V(s1b, gnd) <+ transition((code == 1) ? 0.0 : vlogic, td, tr, tf);
+
+        V(s2,  gnd) <+ transition((code == 2) ? vlogic : 0.0, td, tr, tf);
+        V(s2b, gnd) <+ transition((code == 2) ? 0.0 : vlogic, td, tr, tf);
+
+        V(s3,  gnd) <+ transition((code == 3) ? vlogic : 0.0, td, tr, tf);
+        V(s3b, gnd) <+ transition((code == 3) ? 0.0 : vlogic, td, tr, tf);
+
+        V(s4,  gnd) <+ transition((code == 4) ? vlogic : 0.0, td, tr, tf);
+        V(s4b, gnd) <+ transition((code == 4) ? 0.0 : vlogic, td, tr, tf);
+
+        V(s5,  gnd) <+ transition((code == 5) ? vlogic : 0.0, td, tr, tf);
+        V(s5b, gnd) <+ transition((code == 5) ? 0.0 : vlogic, td, tr, tf);
+
+        V(s6,  gnd) <+ transition((code == 6) ? vlogic : 0.0, td, tr, tf);
+        V(s6b, gnd) <+ transition((code == 6) ? 0.0 : vlogic, td, tr, tf);
+
+        V(s7,  gnd) <+ transition((code == 7) ? vlogic : 0.0, td, tr, tf);
+        V(s7b, gnd) <+ transition((code == 7) ? 0.0 : vlogic, td, tr, tf);
+    end
+
+endmodule

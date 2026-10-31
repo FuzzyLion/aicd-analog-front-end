@@ -1,0 +1,60 @@
+% !TEX program = lualatex
+\documentclass[a4paper,11pt]{report}
+\usepackage[a4paper,left=23mm,right=23mm,top=24mm,bottom=24mm]{geometry}
+\usepackage[english,main=english]{babel}
+\usepackage{fontspec}
+\usepackage[autostyle]{csquotes}
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage[parfill]{parskip}
+\usepackage[hypertexnames=false,colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
+\sisetup{group-digits=integer}
+\newcommand{\opamp}{OPAMP}
+\newcommand{\VDD}{V_{\mathrm{DD}}}
+\newcommand{\VCM}{V_{\mathrm{CM}}}
+\newcommand{\Ron}{R_{\mathrm{on}}}
+\newcommand{\Roff}{R_{\mathrm{off}}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\hypersetup{pdftitle={Programmable-Gain Analog Front End},pdfauthor={Qi Wu and one teammate},pdfsubject={AICD Lab portfolio edition}}
+\begin{document}
+\begin{titlepage}
+\raggedright
+\vspace*{24mm}
+{\large Advanced Integrated Circuit Design Lab\par}
+\vspace{12mm}
+{\Huge\bfseries Programmable-Gain\\[3mm]Analog Front End\par}
+\vspace{8mm}
+{\Large OPAMP, PGA, and Active Low-Pass Filter\par}
+\vspace{16mm}
+{\large Qi Wu and one teammate\par}
+TU Darmstadt\par
+Summer semester 2026\par
+\vfill
+\textbf{Portfolio edition}\par
+This report documents the group's schematic design and archived simulation results. Teammate layout images and physical-verification screenshots are omitted from this portfolio edition. The contribution statement identifies each student's work.\par
+Nominal, corner, and Monte Carlo results are schematic-level results. Complete extracted-view and PEX performance results are not available.\par
+\end{titlepage}
+\include{chapters/abstract}
+\tableofcontents
+\include{chapters/introduction}
+\include{chapters/opamp}
+\include{chapters/pga}
+\include{chapters/layout}
+\include{chapters/conclusion}
+\include{chapters/ai_usage}
+\appendix
+\include{chapters/appendix}
+\begingroup
+\small
+\listoffigures
+\listoftables
+\endgroup
+\end{document}

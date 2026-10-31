@@ -1,0 +1,40 @@
+\chapter{Introduction}
+
+\section{Design objective}
+
+We designed a programmable-gain analog front end consisting of an OPAMP, an eight-step PGA, and an active LPF. The PGA adjusts the signal amplitude for the following ADC, while the LPF limits out-of-band content. We set \(\VDD=\SI{1.8}{V}\) and \(\VCM=\SI{0.9}{V}\), with a load of at least \SI{2}{pF}.
+
+The PGA performance depends directly on the OPAMP output range, stability, load capability, and offset. The layout must preserve the simulated resistor ratios, switch dimensions, controller behavior, and LPF values. We therefore report the schematic design first, together with its nominal, PVT-corner, and Monte Carlo verification.
+
+\section{Specifications and verification}
+
+Numerical values come from the Cadence ADE exports. Screenshots document circuit configurations and waveform trends; where labels are small, the exported scalar values are used instead of numbers read from the image. Table~\ref{tab:requirements} summarizes the OPAMP requirements and measurement methods given in the course documents.
+
+\begin{table}[htbp]
+\centering
+\caption{OPAMP design requirements and verification methods.}
+\label{tab:requirements}
+\small
+\renewcommand{\arraystretch}{0.92}
+\begin{tabularx}{\textwidth}{@{}Y C Y@{}}
+\toprule
+Metric & Requirement & Verification method \\
+\midrule
+DC gain & $>\SI{50}{dB}$ & AC/STB analysis \\
+Gain-bandwidth product & $\geq\SI{20}{MHz}$ & AC/STB analysis \\
+Phase margin & $\geq\SI{55}{\degree}$ & STB analysis \\
+CMRR & $>\SI{60}{dB}$ & common-mode small-signal analysis \\
+Positive/negative slew rate & each $\geq\SI{15}{V/\micro s}$ & large-signal transient \\
+High/low settling time & each $\leq\SI{500}{ns}$ at 5\% & large-signal transient \\
+Input common-mode range & \SIrange{0.5}{1.3}{V} & unity-follower error $<\SI{50}{mV}$ over the specified interval \\
+Output swing & \SIrange{0.3}{1.5}{V} & output sweep/transient \\
+Input offset & $\leq\SI{5}{mV}$ absolute & DC and Monte Carlo \\
+Input noise & $\leq\SI{55}{nV/\sqrt{Hz}}$ at \SI{20}{kHz} & noise analysis \\
+Power & $\leq\SI{0.6}{mW}$ & supply-current measurement \\
+Area & report value & extracted layout \\
+\bottomrule
+\end{tabularx}
+\renewcommand{\arraystretch}{1}
+\end{table}
+
+The PGA targets 0 to \SI{21}{dB} in \SI{3}{dB} steps with a tolerance of $\pm\SI{1.5}{dB}$, while the LPF targets \SI{100}{kHz} within the allowed \SIrange{50}{150}{kHz} range. This portfolio excludes teammate layout and physical-verification images. Chapter~4 states the scope and remaining verification work.

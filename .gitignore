@@ -1,0 +1,36 @@
+.DS_Store
+._*
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+build/
+tmp/
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.zip
+
+# Keep local simulator state and licensed technology files out of this portfolio.
+cds.lib
+lib.defs
+*.cdslck
+*.oa
+*.psf
+psf*/
+simulation/
+PDK/
+pdk/
+
+# Keep excluded course-archive material out of future portfolio updates.
+data/opamp/dc_operating_point.csv
+report/figures/layout/
+report/figures/opamp/schematic_layout_ready.jpeg

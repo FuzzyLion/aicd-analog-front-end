@@ -1,0 +1,43 @@
+Test,Name,Yield,Min,Target,Max,Mean,Std Dev,Cpk,Errors
+Overall Yield Estimate: 100 %(100 passed/100 pts)     Confidence Level: <not set>   Filter: <not set>,,,,,,,,,
+Yield Estimate: 100 %(100 passed/100 pts) | Parameters: gain_code=0,,,,,,,,,
+main,,,,,,,,,
+,Gain_PGA_Err_tolerence(summary),100% (100/100),79.3e-3,,224.8e-3,146.1e-3,27.01e-3,16.7,0
+,Gain_LPF(summary),100% (100/100),-45.52e-3,,34.13e-3,-4.385e-3,17.97e-3,27.7,0
+,BW_LPF_Scalar(summary),100% (100/100),82.8e3,,119.5e3,100e3,6.796e3,2.45,0
+Yield Estimate: 100 %(100 passed/100 pts) | Parameters: gain_code=1,,,,,,,,,
+main,,,,,,,,,
+,Gain_PGA_Err_tolerence(summary),100% (100/100),51.14e-3,,174.8e-3,105.9e-3,23.87e-3,19.5,0
+,Gain_LPF(summary),100% (100/100),-45.52e-3,,34.13e-3,-4.385e-3,17.97e-3,27.7,0
+,BW_LPF_Scalar(summary),100% (100/100),82.8e3,,119.5e3,100e3,6.796e3,2.45,0
+Yield Estimate: 100 %(100 passed/100 pts) | Parameters: gain_code=2,,,,,,,,,
+main,,,,,,,,,
+,Gain_PGA_Err_tolerence(summary),100% (100/100),24.89e-3,,141.7e-3,72.09e-3,22.53e-3,21.1,0
+,Gain_LPF(summary),100% (100/100),-45.52e-3,,34.13e-3,-4.385e-3,17.97e-3,27.7,0
+,BW_LPF_Scalar(summary),100% (100/100),82.8e3,,119.5e3,100e3,6.796e3,2.45,0
+Yield Estimate: 100 %(100 passed/100 pts) | Parameters: gain_code=3,,,,,,,,,
+main,,,,,,,,,
+,Gain_PGA_Err_tolerence(summary),100% (100/100),-2.384e-3,,117.9e-3,47.38e-3,23.47e-3,20.6,0
+,Gain_LPF(summary),100% (100/100),-45.52e-3,,34.13e-3,-4.385e-3,17.97e-3,27.7,0
+,BW_LPF_Scalar(summary),100% (100/100),82.8e3,,119.5e3,100e3,6.796e3,2.45,0
+Yield Estimate: 100 %(100 passed/100 pts) | Parameters: gain_code=4,,,,,,,,,
+main,,,,,,,,,
+,Gain_PGA_Err_tolerence(summary),100% (100/100),-24.17e-3,,87.82e-3,29.22e-3,20.74e-3,23.6,0
+,Gain_LPF(summary),100% (100/100),-45.52e-3,,34.13e-3,-4.385e-3,17.97e-3,27.7,0
+,BW_LPF_Scalar(summary),100% (100/100),82.8e3,,119.5e3,100e3,6.796e3,2.45,0
+Yield Estimate: 100 %(100 passed/100 pts) | Parameters: gain_code=5,,,,,,,,,
+main,,,,,,,,,
+,Gain_PGA_Err_tolerence(summary),100% (100/100),-27.59e-3,,65.15e-3,15.22e-3,20.22e-3,24.5,0
+,Gain_LPF(summary),100% (100/100),-45.52e-3,,34.13e-3,-4.385e-3,17.97e-3,27.7,0
+,BW_LPF_Scalar(summary),100% (100/100),82.8e3,,119.5e3,100e3,6.796e3,2.45,0
+Yield Estimate: 100 %(100 passed/100 pts) | Parameters: gain_code=6,,,,,,,,,
+main,,,,,,,,,
+,Gain_PGA_Err_tolerence(summary),100% (100/100),-47.6e-3,,52.54e-3,5.463e-3,20.69e-3,24.1,0
+,Gain_LPF(summary),100% (100/100),-45.52e-3,,34.13e-3,-4.385e-3,17.97e-3,27.7,0
+,BW_LPF_Scalar(summary),100% (100/100),82.8e3,,119.5e3,100e3,6.796e3,2.45,0
+Yield Estimate: 100 %(100 passed/100 pts) | Parameters: gain_code=7,,,,,,,,,
+main,,,,,,,,,
+,Gain_PGA_Err_tolerence(summary),100% (100/100),-69.73e-3,,68.59e-3,-3.438e-3,22.88e-3,21.8,0
+,Gain_LPF(summary),100% (100/100),-45.52e-3,,34.13e-3,-4.385e-3,17.97e-3,27.7,0
+,BW_LPF_Scalar(summary),100% (100/100),82.8e3,,119.5e3,100e3,6.796e3,2.45,0
+

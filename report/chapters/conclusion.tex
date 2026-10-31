@@ -1,0 +1,13 @@
+\chapter{Conclusion}
+
+The two-stage Miller-compensated OPAMP achieves \SI{79.93}{dB} DC gain, a \SI{51.31}{MHz} gain-bandwidth product, and a \SI{61.97}{\degree} phase margin. Within the specified \SIrange{0.5}{1.3}{V} ICMR, the maximum follower error is \SI{0.8503}{mV}. All 12 expressions in the 64-corner export pass at every corner. In the 1000-point Monte Carlo analysis, the offset meets the \SI{5}{mV} limit in 972 cases; the other exported metrics pass 1000/1000.
+
+All eight PGA settings from 0 to \SI{21}{dB} in \SI{3}{dB} steps remain within the \(\pm\SI{1.5}{dB}\) tolerance at nominal conditions, across all 64 corners, and for 100 Monte Carlo samples per code. The behavioral Verilog-A controller is included in these complete PGA sweeps, which verify its static decode path together with the MUX and feedback network. The active LPF has a nominal bandwidth of \SI{100.1}{kHz}, with a corner range of \SIrange{72.88}{121.8}{kHz} and a Monte Carlo range of \SIrange{82.8}{119.5}{kHz}.
+
+The remaining circuit-level limitation is the OPAMP output swing of approximately \SIrange{0.430}{1.401}{V}, which does not cover the full specified \SIrange{0.3}{1.5}{V} range. It caused no failure in the available PGA corner or Monte Carlo runs, so we retained the design for the tested operating range. We also retained the \SI{1.6066}{M\ohm} LPF resistance paths, accepting the resulting area risk instead of redesigning the capacitor and rerunning the complete flow.
+
+This portfolio presents schematic design and verification. Physical implementation was assigned to the teammate; their layout images and verification screenshots are omitted. No complete extracted-view or PEX performance is claimed.
+
+\section*{Contribution / Task Distribution}
+
+Qi Wu carried out OPAMP integration, transistor sizing and tuning, and testbench setup. He designed the PGA feedback network and active LPF, integrated the transmission gates and behavioral Controller, and performed the final schematic-level verification and result analysis. The teammate designed the current-source and bias section, performed the initial PGA corner and Monte Carlo runs, and implemented the available component layouts and physical checks. Qi Wu prepared the layout handoff, wrote the schematic sections, and integrated the final report. The detailed task split is documented in the repository contribution statement. Results without supporting files are left open and explained in the corresponding section.

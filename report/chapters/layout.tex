@@ -1,0 +1,11 @@
+\chapter{Scope and Remaining Work}
+
+This portfolio presents schematic design and verification. Physical implementation was assigned to the teammate. Their layout images and DRC/LVS screenshots are omitted from the shared files; the contribution statement preserves that task split without displaying their implementation.
+
+No completed OPAMP, PGA, or LPF extracted-view performance is claimed. The schematic results in the earlier chapters are not post-layout results. Area is not reported because no measured dimensions are included.
+
+The recorded physical-verification flow was incomplete. Clean DRC and LVS, extraction, and matched schematic-to-PEX simulations would be needed before reporting post-layout nominal, corner, or Monte Carlo performance.
+
+The schematic limitations also remain: the OPAMP output swing does not cover the full target range, and the offset Monte Carlo yield is 972/1000. The archive has no measured PGA gain-switching transient, full all-code PGA phase plot, or per-code summary of safe input range, stability, and power. Static code sweeps verify the behavioral decoder with the PGA feedback network; they do not establish switching-hazard or gate-level behavior.
+
+The detailed device operating-point export is excluded from the shared repository. The compact operating-point table in the OPAMP chapter is retained to explain the design decisions. This editorial scope does not establish permission to redistribute technology data; any broader release needs confirmation of the applicable course and PDK terms.
