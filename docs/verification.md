@@ -1,12 +1,10 @@
-# Verification and limits
+# Verification
 
-This page is generated from the archived CSV exports by `python3 scripts/summarize_results.py`. The script recomputes corner pass counts from the 64 values and checks the exported extrema. Monte Carlo yields are reported summary values; individual sample data are not archived. No circuit simulation is run by this script.
+`scripts/summarize_results.py` generates this page from the CSV exports in [data/](../data/). For each corner metric it recounts the passes from the 64 raw values and checks the reported min and max against them. For Monte Carlo it can only check the summary rows, such as ranges, simulator errors and reported yields, because the files have no per-sample data. It does not run any circuit simulation.
 
-## OPAMP schematic baseline
+## OPAMP corners
 
-Nominal conditions: 1.8 V, 27 °C, 0.9 V common mode, and a 2 pF load. The 64-corner grid combines two MIM capacitor settings, two resistor settings, four transistor process settings, −25/85 °C, and 1.62/1.98 V. This is the lab's exported grid, not an exhaustive process or reliability qualification.
-
-Source: [corner export](../data/opamp/corners.csv).
+Nominal is 1.8 V, 27 °C, 0.9 V common mode and a 2 pF load. The 64 corners combine two MIM capacitor settings, two resistor settings, four transistor process settings, −25/85 °C and 1.62/1.98 V. Source: [corner export](../data/opamp/corners.csv).
 
 | Metric | Nominal | Corner min | Corner max | Passed |
 |---|---:|---:|---:|---:|
@@ -23,11 +21,11 @@ Source: [corner export](../data/opamp/corners.csv).
 | Phase margin (°) | 61.97 | 59.57 | 68.81 | 64/64 |
 | GBW (MHz) | 51.31 | 32.28 | 72.94 | 64/64 |
 
-ICMR and output swing are absent from this corner export. The standalone nominal follower check gives a maximum error of 0.8503 mV over the specified 0.5–1.3 V input common-mode range. The wider 0–1.8 V sweep is the test range. The recorded output swing, 0.4302–1.4006 V, does not meet the 0.3–1.5 V target. These two standalone results are documented in the report and figures, not recomputed from the CSV.
+ICMR and output swing are not in the corner export, and I checked them at nominal only. A unity follower stays within 0.8503 mV of its input over the specified 0.5–1.3 V common-mode range. Output swing is 0.4302–1.4006 V, which misses the 0.3–1.5 V target. Both numbers are taken from the report, because the CSV does not contain them.
 
-### OPAMP Monte Carlo
+## OPAMP Monte Carlo
 
-The recorded setup uses variation `All`, random sampling, 1000 points per test, and seed 12345. Source: [Monte Carlo summary](../data/opamp/monte_carlo.csv).
+The run uses 1000 points per test, variation `All`, random sampling and seed 12345. Source: [Monte Carlo summary](../data/opamp/monte_carlo.csv).
 
 | Metric | Min | Max | Mean | σ | Reported yield |
 |---|---:|---:|---:|---:|---:|
@@ -40,11 +38,11 @@ The recorded setup uses variation `All`, random sampling, 1000 points per test, 
 | GBW (MHz) | 42.09 | 63.05 | 51.42 | 3.25 | 100% (1000/1000) |
 | Offset (mV) | -7.447 | 5.518 | -0.4735 | 2.212 | 97.2% (972/1000) |
 
-Offset is the limiting reported yield: 28 of 1000 points exceed ±5 mV. A 1000-point reported yield is a result for that sample set, not a manufacturing yield guarantee. CMRR, noise, power, ICMR, and output swing are not covered by this eight-metric Monte Carlo summary.
+Offset is the only metric below 100%, with 28 of 1000 samples beyond ±5 mV. CMRR, noise, power, ICMR and output swing are not part of this Monte Carlo run.
 
 ## PGA and LPF
 
-Sources: [corner export](../data/pga/corners.csv), [Monte Carlo summary](../data/pga/monte_carlo.csv). Gain tolerance is ±1.5 dB around each target. The gain-error expression is stored relative to `3 × gain_code` dB; the table adds that target back to show absolute gain.
+Sources: [corner export](../data/pga/corners.csv), [Monte Carlo summary](../data/pga/monte_carlo.csv). Each code has a ±1.5 dB window around its target. The export stores the gain error relative to `3 × gain_code` dB, and the table adds the target back to show the absolute gain.
 
 | Code | Target (dB) | Nominal (dB) | Corner min…max (dB) | Corners passed | MC mean ± σ (dB) | Reported MC yield |
 |---|---:|---:|---:|---:|---:|---:|
@@ -57,14 +55,12 @@ Sources: [corner export](../data/pga/corners.csv), [Monte Carlo summary](../data
 | 110 | 18 | 18.006 | 17.982…18.13 | 64/64 | 18.005 ± 0.02069 | 100% (100/100) |
 | 111 | 21 | 20.997 | 20.955…21.098 | 64/64 | 20.997 ± 0.02288 | 100% (100/100) |
 
-LPF bandwidth is 100.1 kHz nominally and 72.88–121.8 kHz across corners, within the 50–150 kHz specification. The MC summary reports 82.8–119.5 kHz, mean 100 kHz, σ 6.796 kHz, and 100% (100/100) yield. Identical LPF statistics appear in every code group; they are not treated as 800 independent LPF samples.
+The LPF bandwidth is 100.1 kHz at nominal and 72.88–121.8 kHz across corners, inside the 50–150 kHz spec. Monte Carlo gives 82.8–119.5 kHz, mean 100 kHz, σ 6.796 kHz and 100% (100/100) yield. The export repeats the same LPF statistics in every code group, so they are one set of 100 samples.
 
-## Scope and remaining work
+## Not verified
 
-This portfolio covers schematic work. Teammate layout and physical-verification screenshots are excluded. No OPAMP, PGA, or LPF post-layout performance is claimed. The full device operating-point export is omitted; selected values remain in the report summary table.
-
-Other limits are the missing measured gain-switching transient, full PGA AC phase capture, per-code safe input range, and per-code stability/power summary. The controller is behavioral; static code sweeps do not verify a gate-level implementation or switching hazards. Later layout-oriented redraws have no separate exported simulation baseline. The native Cadence library and complete PGA hierarchy are not archived.
-
-## Checks during portfolio packaging
-
-The data script verifies all 12 OPAMP and 24 PGA/LPF expression rows against their nominal/corner limits, checks all eight gain codes, and checks the structure, ranges, reported errors, and expected yields of 32 MC summary rows. It regenerates this page from the included files. This is verification of the archived exports, separate from the original Cadence simulation work.
+- Post-layout performance. There are no extracted-view results for any block.
+- ICMR and output swing beyond nominal.
+- Switching between gain codes. The sweeps check each code statically, and there is no switching transient in the archive.
+- The decoder at gate level. The controller is a behavioral Verilog-A model.
+- The full PGA AC phase for all codes, the safe input range per code, and per-code stability and power.

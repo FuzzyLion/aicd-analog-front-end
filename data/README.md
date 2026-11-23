@@ -1,6 +1,6 @@
 # Simulation exports
 
-These are unmodified simulator-export CSVs from the lab archive, renamed for navigation. The corner files contain setup rows followed by result tables; they are not single-header rectangular datasets. Model-section names identify run settings and do not contain the model implementations.
+These are the CSV files exported from the Cadence simulator, unchanged except for the file names.
 
 | File | Original filename | Contents |
 |---|---|---|
@@ -9,8 +9,10 @@ These are unmodified simulator-export CSVs from the lab archive, renamed for nav
 | [pga/corners.csv](pga/corners.csv) | `pga_corner.csv` | All eight PGA codes and LPF nominal/corner results |
 | [pga/monte_carlo.csv](pga/monte_carlo.csv) | `pga_mc.csv` | PGA/LPF summary statistics for 100 Monte Carlo points per code |
 
-The full device operating-point export is excluded. Selected operating-point values remain in the report summary table.
+The corner files are not simple rectangular tables. They start with setup rows and then the results. The model-section names in them only label the run settings, and no model files are included.
 
-Monte Carlo CSVs provide summary statistics and reported yield, not all individual sample values. Their yields cannot be independently reconstructed sample by sample from this archive. `python3 scripts/summarize_results.py` checks the corner values against the exported limits and summarizes the reported Monte Carlo statistics. It generates [verification.md](../docs/verification.md) without third-party Python dependencies.
+The Monte Carlo files only have summary statistics and the reported yield, not the individual samples, so the yields cannot be recomputed from them.
 
-The older OPAMP `MonteCarlo.0.csv` used a different testbench context and is not included. This repository uses the final 1000-point export from the project's own testbenches.
+[scripts/summarize_results.py](../scripts/summarize_results.py) reads these files and writes [docs/verification.md](../docs/verification.md). It needs only the Python 3 standard library.
+
+Two files are left out. The full device operating-point export is not here, and the report keeps the values that explain the sizing. An older OPAMP Monte Carlo export, `MonteCarlo.0.csv`, came from a different testbench, so I used the final 1000-point export from my own testbenches instead.
